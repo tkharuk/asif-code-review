@@ -1,0 +1,9 @@
+.tabs {
+  background-color: grey;
+  padding: 20px;
+}
+
+.tabItem {
+  padding: 10px;
+  font-size: 20px;
+}
