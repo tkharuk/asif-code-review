@@ -8,6 +8,7 @@ const initialState = {
     _id: undefined,
     section: undefined,
     columns: undefined,
+    sort: undefined,
     title: undefined,
     createdAt: undefined,
     filters: [],
