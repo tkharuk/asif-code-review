@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { useTable, useFilters, useSortBy } from 'react-table';
 
+import TextCell from './cells/TextCell';
+import PersonCell from './cells/PersonCell';
+import DateCell from './cells/DateCell';
+
+const CELLS = {
+  TextCell,
+  PersonCell,
+  DateCell,
+};
+
 export default function Table({ columns, data }) {
   const [filterInput, setFilterInput] = useState('');
   // Use the state and functions returned from useTable to build your UI
@@ -61,7 +71,14 @@ export default function Table({ columns, data }) {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-                  return <td {...cell.getCellProps()}>{cell.value}</td>;
+                  const { cellType = '' } = cell;
+                  const Cell = CELLS[cellType] || TextCell;
+
+                  return (
+                    <td {...cell.getCellProps()}>
+                      {<Cell value={cell.value} {...cell} />}
+                    </td>
+                  );
                 })}
               </tr>
             );
