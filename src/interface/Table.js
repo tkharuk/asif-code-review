@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import Table from 'foundation/Table';
 
-import { fetchData } from './table.actions';
+import { fetchData, resetData, modifyView } from './table.actions';
 
 import { getData, getIsFetchingData } from './table.selectors';
 import { getConfig } from '../config/config.selectors';
@@ -14,7 +14,7 @@ const TableContainer = () => {
   const dispatch = useDispatch();
   const { columns: configColumns } = useSelector(getConfig);
   const view = useSelector(getView);
-  const { columns: viewColumns } = view;
+  const { columns: viewColumns, sort: sortBy } = view;
   const isFetchingData = useSelector(getIsFetchingData);
   const data = useSelector(getData);
 
@@ -25,6 +25,11 @@ const TableContainer = () => {
     }
   }, [dispatch, view]);
 
+  const handleSort = (sort) => {
+    dispatch(resetData());
+    dispatch(modifyView({ sort }));
+  };
+
   if (!viewColumns || !configColumns) return null;
   return (
     <div className="d-flex-fill flex-1 overflow-y-scroll px-9">
@@ -33,6 +38,8 @@ const TableContainer = () => {
           'data-qa-table-ready': !isFetchingData && data,
         })}
         data={data}
+        onSort={handleSort}
+        sortBy={sortBy}
       />
     </div>
   );
