@@ -14,7 +14,7 @@ export default class Tabs extends Component {
     return (
       <div className={styles.tabs}>
         <div>{ items.map((item) => (
-          <TabItem data={item} /> ))}
+          <TabItem {...item} data={item} /> ))}
         </div>
       </div>
     )

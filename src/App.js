@@ -6,7 +6,7 @@ const tabsData = [
   { title: 'Home' },
   { title: 'Movies' },
   { title: 'Music' },
-  { title: 'Photos' },
+  { title: 'Photos', disabled: true },
 ]
 
 function App() {
